@@ -6,13 +6,10 @@
     <title>IELTS Essay Grader</title>
 </head>
 <body>
-    <h1>IELTS Essay Grader</h1>
-    <form action="/grade" method="post">
-        <label for="question">Enter the essay question:</label><br>
-        <textarea id="question" name="question" rows="4" cols="50"></textarea><br><br>
-        <label for="essay">Enter your essay:</label><br>
-        <textarea id="essay" name="essay" rows="10" cols="50"></textarea><br><br>
-        <input type="submit" value="Submit">
-    </form>
+<form action="/grade" method="post">
+    <input type="text" name="question" placeholder="Enter your question">
+    <textarea name="essay" placeholder="Enter your essay"></textarea>
+    <button type="submit">Submit</button>
+</form>
 </body>
 </html>
