@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+</head>
+<body>
+    <h1>Grading Result</h1>
+    <p><strong>Word Count:</strong> {{ result.word_count }}</p>
+    <p><strong>Spelling Errors:</strong> {{ result.spelling_errors }}</p>
+    <p><strong>Task Response Score:</strong> {{ result.task_response_score }}</p>
+    <p><strong>Coherence Score:</strong> {{ result.coherence_score }}</p>
+    <p><strong>Lexical Score:</strong> {{ result.lexical_score }}</p>
+    <p><strong>Grammar Score:</strong> {{ result.grammar_score }}</p>
+    <p><strong>Overall Score:</strong> {{ result.overall_score }}</p>
+    <p><strong>Feedback:</strong></p>
+    <pre>{{ result.feedback }}</pre>
+</body>
+</html>
