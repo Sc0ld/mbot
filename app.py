@@ -1,19 +1,20 @@
-from flask import Flask, request, render_template
-from ielts_grader import IELTSGrader
+from flask import Flask, request, redirect, url_for
 
 app = Flask(__name__)
-grader = IELTSGrader()
 
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/grade', methods=['POST'])
-def grade_essay():
+def grade():
     question = request.form['question']
     essay = request.form['essay']
-    result = grader.grade_essay(essay, question)
-    return render_template('result.html', result=result)
+    
+    # Process the question and essay
+    # e.g., grading logic here
+    
+    return 'Your grade has been calculated.'
 
 if __name__ == '__main__':
     app.run(debug=True)
