@@ -17,4 +17,4 @@ def grade():
     return 'Your grade has been calculated.'
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run()
