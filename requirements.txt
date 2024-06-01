@@ -1,0 +1,6 @@
+Flask
+language-tool-python
+nltk
+numpy
+pyspellchecker
+scikit-learn
