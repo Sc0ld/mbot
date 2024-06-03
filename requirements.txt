@@ -1,5 +1,5 @@
 Flask==3.0.3
 nltk==3.8.1
-scikit_learn==1.5.0
+scikit_learn
 spellchecker==0.4
 textblob==0.18.0.post0
