@@ -124,7 +124,12 @@ class IELTSGrader:
 
     def map_score_to_band(self, score, thresholds, additional_condition=None):
         for threshold, band in thresholds:
-            if score >= threshold and (additional_condition is None or additional_condition[0] > additional_condition[1][thresholds.index((threshold, band))]):
+            if additional_condition is not None:
+                index = thresholds.index((threshold, band))
+                if index >= len(additional_condition[1]):
+                    continue  # Skip this iteration if index is out of range
+
+            if score >= threshold and (additional_condition is None or additional_condition[0] > additional_condition[1][index]):
                 return band
         return 3
 
