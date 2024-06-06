@@ -12,8 +12,11 @@ def index():
 @app.route('/grade', methods=['POST'])
 def grade_essay():
     question = request.form['question']
+    print(question)
     essay = request.form['essay']
+    print(essay)
     result = grader.grade_essay(essay, question)
+    print(result)
     return render_template('result.html', result=result)
 
 if __name__ == '__main__':
