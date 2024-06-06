@@ -4,12 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IELTS Essay Grader</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<form action="/grade" method="post">
-    <input type="text" name="question" placeholder="Enter your question">
-    <textarea name="essay" placeholder="Enter your essay"></textarea>
-    <button type="submit">Submit</button>
-</form>
+    <h1>IELTS Essay Grader</h1>
+    <form id="gradingForm">
+        <label for="question">Enter the essay question:</label><br>
+        <textarea id="question" name="question" rows="4" cols="50"></textarea><br><br>
+        <label for="essay">Enter your essay:</label><br>
+        <textarea id="essay" name="essay" rows="10" cols="50"></textarea><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <div id="result" style="display:none;">
+        <h2>Grading Result</h2>
+        <p><strong>Word Count:</strong> <span id="word_count"></span></p>
+        <p><strong>Spelling Errors:</strong> <span id="spelling_errors"></span></p>
+        <p><strong>Task Response Score:</strong> <span id="task_response_score"></span></p>
+        <p><strong>Coherence Score:</strong> <span id="coherence_score"></span></p>
+        <p><strong>Lexical Score:</strong> <span id="lexical_score"></span></p>
+        <p><strong>Grammar Score:</strong> <span id="grammar_score"></span></p>
+        <p><strong>Overall Score:</strong> <span id="overall_score"></span></p>
+        <p><strong>Feedback:</strong></p>
+        <pre id="feedback"></pre>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $('#gradingForm').on('submit', function(event){
+                event.preventDefault();
+                
+                $.ajax({
+                    url: '/grade',
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        $('#result').show();
+                        $('#word_count').text(response.word_count);
+                        $('#spelling_errors').text(response.spelling_errors);
+                        $('#task_response_score').text(response.task_response_score);
+                        $('#coherence_score').text(response.coherence_score);
+                        $('#lexical_score').text(response.lexical_score);
+                        $('#grammar_score').text(response.grammar_score);
+                        $('#overall_score').text(response.overall_score);
+                        $('#feedback').text(response.feedback);
+                    },
+                    error: function(response) {
+                        alert('An error occurred: ' + response.responseJSON.error);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
