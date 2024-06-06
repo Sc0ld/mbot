@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 from ielts_grader import IELTSGrader
 
 app = Flask(__name__)
@@ -11,13 +12,15 @@ def index():
 
 @app.route('/grade', methods=['POST'])
 def grade_essay():
-    question = request.form['question']
-    print(question)
-    essay = request.form['essay']
-    print(essay)
-    result = grader.grade_essay(essay, question)
-    print(result)
-    return render_template('result.html', result=result)
+    try:
+        question = request.form['question']
+        essay = request.form['essay']
+        result = grader.grade_essay(essay, question)
+        return jsonify(result)
+    except KeyError as e:
+        return jsonify({"error": f"Missing form parameter: {str(e)}"}), 400
+    except Exception as e:
+        return jsonify({"error": f"An error occurred: {str(e)}"}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
