@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>IELTS Essay Grader</h1>
-    <form id="gradingForm">
+    <form id="gradingForm" method="POST" action="/">
         <label for="question">Enter the essay question:</label><br>
         <textarea id="question" name="question" rows="4" cols="50"></textarea><br><br>
         <label for="essay">Enter your essay:</label><br>
@@ -35,7 +35,7 @@
                 event.preventDefault();
                 
                 $.ajax({
-                    url: '/grade',
+                    url: '/',
                     type: 'POST',
                     data: $(this).serialize(),
                     success: function(response) {
